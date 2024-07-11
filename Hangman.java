@@ -10,20 +10,32 @@ public class Hangman {
 
     try {
 
-      // Creating scanners for file handling and user inputs
-      Scanner scanner = new Scanner(new File("D:/Java Mastery/1. Java/Projects/Hangman-Game/text.txt"));
       Scanner keyboard = new Scanner(System.in);
+      // Asking the user for a single or a multi-players game
+      System.out.println("1 or 2 players?");
+      String player = keyboard.nextLine();
 
-      List<String> words = new ArrayList<>();
+      String word;
+      if (player.equals("1")) {
+        // Creating scanners for file handling and user inputs
+        Scanner scanner = new Scanner(new File("D:/Java Mastery/1. Java/Projects/Hangman-Game/text.txt"));
+  
+        List<String> words = new ArrayList<>();
+  
+        // Looping over the file
+        while (scanner.hasNext()) {
+          words.add(scanner.nextLine());
+        }
+  
+        Random rand = new Random();
+        word = words.get(rand.nextInt(words.size()));
 
-      // Looping over the file
-      while (scanner.hasNext()) {
-        words.add(scanner.nextLine());
+      } else {
+        System.out.println("Player 1, Please enter your word:");
+        word = keyboard.nextLine();
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("Ready for Player 2! good luck!");
       }
-
-      Random rand = new Random();
-      String word = words.get(rand.nextInt(words.size()));
-      System.out.println(word);
 
       List<Character> playerGuesses = new ArrayList<>();
       
@@ -34,6 +46,7 @@ public class Hangman {
 
         if (wrongCount >= 6) {
           System.out.println("You lose!");
+          System.out.println("The word was: " + word);
           break;
         }
 
